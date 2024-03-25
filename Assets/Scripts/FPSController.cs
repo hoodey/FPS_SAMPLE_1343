@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FPSController : MonoBehaviour
 {
@@ -64,7 +65,7 @@ public class FPSController : MonoBehaviour
 
         if(grounded && velocity.y < 0)
         {
-            velocity.y = -0.5f;
+            velocity.y = -1f;
         }
 
         Vector2 movement = GetPlayerMovementVector();
@@ -158,6 +159,11 @@ public class FPSController : MonoBehaviour
     bool GetSprint()
     {
         return Input.GetButton("Sprint");
+    }
+
+    public Gun GetCurrentGun()
+    {
+        return currentGun;
     }
 
     // Collision methods
