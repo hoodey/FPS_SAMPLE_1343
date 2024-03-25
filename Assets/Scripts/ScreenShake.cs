@@ -23,16 +23,21 @@ public class ScreenShake : MonoBehaviour
 
     public void StartShake()
     {
-        camShake = 100;
+        camShake = 1;
         vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = camShake;
         StartCoroutine(ShakeFade());
-        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = camShake;
     }
     
     IEnumerator ShakeFade()
     {
-        yield return new WaitForSeconds(2.0f);
+        for (float i = 1.0f; i >= 0.1f; i -= 0.2f)
+        {
+            camShake = i;
+            vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = camShake;
+            yield return new WaitForSeconds(.1f);
+        }
         camShake = 0;
+        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = camShake;
     }
 
 }
