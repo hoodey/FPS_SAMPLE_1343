@@ -10,14 +10,17 @@ public class FPSController : MonoBehaviour
     [SerializeField] GameObject cam;
     [SerializeField] Transform gunHold;
     [SerializeField] Gun initialGun;
+    [SerializeField] UnityEvent OnDamage;
 
     // stats
     [SerializeField] float movementSpeed = 2.0f;
     [SerializeField] float lookSensitivityX = 1.0f;
     [SerializeField] float lookSensitivityY = 1.0f;
     [SerializeField] float gravity = -9.81f;
-    [SerializeField] float jumpForce = 10;
-    
+    [SerializeField] float jumpForce = 10f;
+    [SerializeField] public float maxHealth = 10.0f;
+    [SerializeField] public float health = 10.0f;
+
     // private variables
     Vector3 velocity;
     bool grounded;
@@ -176,6 +179,7 @@ public class FPSController : MonoBehaviour
             var collisionPoint = hit.collider.ClosestPoint(transform.position);
             var knockbackAngle = (transform.position - collisionPoint).normalized;
             velocity = (20 * knockbackAngle);
+            OnDamage.Invoke();
         }
     }
 }

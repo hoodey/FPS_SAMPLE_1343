@@ -24,7 +24,7 @@ public class PlayerHUD : MonoBehaviour
 
     void Update()
     {
-        
+        healthBar.fillAmount = player.health / player.maxHealth;
     }
 
     public void UpdateAmmo()

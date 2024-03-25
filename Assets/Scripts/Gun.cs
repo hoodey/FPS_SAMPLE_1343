@@ -43,7 +43,7 @@ public class Gun : MonoBehaviour
             return false;
         }
 
-        Debug.Log("Bang");
+        //Debug.Log("Bang");
         Instantiate(bulletPrefab, gunBarrelEnd.transform.position, gunBarrelEnd.rotation);
         anim.SetTrigger("shoot");
         timeBetweenShots = 0;
