@@ -7,7 +7,7 @@ public class ScreenShake : MonoBehaviour
 {
 
     [SerializeField] CinemachineVirtualCamera vcam;
-    float timer = 0.0f;
+    float camShake = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -18,23 +18,21 @@ public class ScreenShake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += 1.0f * Time.deltaTime;
-        Debug.Log(timer);
+
     }
 
     public void StartShake()
     {
-        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 100;
-        timer = 0.0f;
-        while (timer < 2.0f)
-        {
-            //Do nothing
-        }
-        EndShake();
+        camShake = 100;
+        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = camShake;
+        StartCoroutine(ShakeFade());
+        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = camShake;
     }
     
-    public void EndShake()
+    IEnumerator ShakeFade()
     {
-        vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+        yield return new WaitForSeconds(2.0f);
+        camShake = 0;
     }
+
 }
